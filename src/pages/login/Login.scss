@@ -1,0 +1,89 @@
+$color-a : rgb(246,246,246);
+$color-b : rgb(223,227,238);
+$color-c : rgb(139,157,195);
+$color-d : rgb(58,89,152);
+
+.login{
+    height: 100vh;
+    background-color:($color-a) ;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    .card{
+        width: 50%;
+        display: flex;
+        background-color: white;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        border-radius:10px ;
+        -webkit-border-radius:10px ;
+        -moz-border-radius:10px ;
+        -ms-border-radius:10px ;
+        -o-border-radius:10px ;
+        min-height: 350px;
+        overflow: hidden;
+        .left{
+            flex:1;
+            background:linear-gradient(rgba(58,89,152,0.7),rgba(39, 39, 41, 0.4)),url('./assets/login-background-img.jpg') center;
+            background-size: cover;
+            padding: 50px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            color: white;
+            h1{
+                font-size: 70px;
+                line-height: 80px;
+            }
+            p{}
+            span{
+                font-size: 14px;
+            }
+            button{
+                width: 50%;
+                padding: 10px;
+                background-color: $color-a;
+                color: $color-d;
+                font-weight: bold;
+                cursor: pointer;
+                border: none;
+                border-radius: 5px;
+                -webkit-border-radius: 5px;
+                -moz-border-radius: 5px;
+                -ms-border-radius: 5px;
+                -o-border-radius: 5px;
+}
+        }
+        .right{
+            padding: 50px;
+            flex:1;
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+            justify-content: center;
+            h1{
+                color:$color-c
+            }
+            form{
+                display: flex;
+                flex-direction: column;
+                gap:20px;
+                input{
+                    border: none;
+                    border-bottom: 1px solid lightgray;
+                    padding:20px 10px;
+                }
+                button{
+                    width: 50%;
+                    padding: 10px;
+                    background-color: $color-d;
+                    color: $color-a;
+                    font-weight: bold;
+                    border: none;
+                    cursor: pointer;
+                    border-radius: 5px;
+
+                }
+            }
+        }
+    }
+}
