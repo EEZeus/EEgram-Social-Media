@@ -2,7 +2,41 @@ import './Home.scss'
 
 function Home(){
     return(
-        <div className = 'home'>Home</div>
+        <div className = 'home'>
+            <h1>home</h1>
+            <h1>home</h1>
+            <h1>home</h1>
+            <h1>home</h1>
+            <h1>home</h1>
+            <h1>home</h1>
+            <h1>home</h1>
+            <h1>home</h1>
+            <h1>home</h1>
+            <h1>home</h1>
+            <h1>home</h1>
+            <h1>home</h1>
+            <h1>home</h1>
+            <h1>home</h1>
+            <h1>home</h1>
+            <h1>home</h1>
+            <h1>home</h1>
+            <h1>home</h1>
+            <h1>home</h1>
+            <h1>home</h1>
+            <h1>home</h1>
+            <h1>home</h1>
+            <h1>home</h1>
+            <h1>home</h1>
+            <h1>home</h1>
+            <h1>home</h1>
+            <h1>home</h1>
+            <h1>home</h1>
+            <h1>home</h1>
+            <h1>home</h1>
+            <h1>home</h1>
+            <h1>home</h1>
+
+        </div>
     )
 }
 
