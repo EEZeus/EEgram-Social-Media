@@ -3,7 +3,12 @@ $color-b: rgb(223, 227, 238);
 $color-c: rgb(139, 157, 195);
 $color-d: rgb(58, 89, 152);
 $color-danger: #e40014;
+
+@import "../../style.scss";
+
 .rightbar {
+  @include themify($themes) {
+    background-color: themed('bgsoft');
   flex: 3;
   overflow: scroll;
   overscroll-behavior: none;
@@ -16,12 +21,14 @@ $color-danger: #e40014;
   .container {
     padding: 20px;
     .item {
+      background-color: themed('bg');
+
       margin-bottom: 20px;
       box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2),
         0 6px 20px 0 rgba(0, 0, 0, 0.19);
       padding: 20px;
       span {
-        color: grey;
+        color: themed('textcolorsoft');
       }
 
       .user {
@@ -59,17 +66,17 @@ $color-danger: #e40014;
           }
           span{
             font-weight: 500;
-            color: black;
+            color: themed('textcolor');
             font-size: 14px;
 
           }
           p {
             max-width: 70%;
-            color: grey;
+            color: themed('textcolorsoft');
             font-size: 12px;
             span {
               font-weight: 500;
-              color: black;
+              color: themed('textcolor');
               font-size: 14px;
 
             }
@@ -88,6 +95,11 @@ $color-danger: #e40014;
             padding: 5px;
             color: white;
             cursor: pointer;
+            border-radius: 2px;
+            -webkit-border-radius: 2px;
+            -moz-border-radius: 2px;
+            -ms-border-radius: 2px;
+            -o-border-radius: 2px;
 
             &:first-child {
               background-color: $color-d;
@@ -100,4 +112,5 @@ $color-danger: #e40014;
       }
     }
   }
+}
 }
