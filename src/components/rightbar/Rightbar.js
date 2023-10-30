@@ -1,6 +1,10 @@
+import { useContext } from "react";
 import "./Rightbar.scss";
+import { AuthContext } from "../../Context/AuthContext";
 
 function Rightbar() {
+
+  const {currentUser} = useContext(AuthContext)
   return (
     <div className="rightbar">
       <div className="container">
@@ -9,10 +13,10 @@ function Rightbar() {
           <div className="user">
             <div className="userInfo">
               <img
-                src="https://images.pexels.com/photos/18704284/pexels-photo-18704284.jpeg?cs=srgb&dl=pexels-phong-vo-18704284.jpg&fm=jpg"
+                src={currentUser.profilePic}
                 alt=""
               />
-              <span>Ehsan Espandar</span>
+              <span>{currentUser.name}</span>
             </div>
             <div className="buttons">
               <button>Follow</button>
@@ -20,12 +24,12 @@ function Rightbar() {
             </div>
           </div>
           <div className="user">
-            <div className="userInfo">
+          <div className="userInfo">
               <img
-                src="https://images.pexels.com/photos/18704284/pexels-photo-18704284.jpeg?cs=srgb&dl=pexels-phong-vo-18704284.jpg&fm=jpg"
+                src={currentUser.profilePic}
                 alt=""
               />
-              <span>Ehsan Espandar</span>
+              <span>{currentUser.name}</span>
             </div>
             <div className="buttons">
               <button>Follow</button>
@@ -38,35 +42,35 @@ function Rightbar() {
           <div className="user">
             <div className="userInfo">
               <img
-                src="https://images.pexels.com/photos/18704284/pexels-photo-18704284.jpeg?cs=srgb&dl=pexels-phong-vo-18704284.jpg&fm=jpg"
+                src={currentUser.profilePic}
                 alt=""
               />
               <p>
-                <span>Ehsan Espandar</span> Changed their cover picture
+                <span>{currentUser.name}</span> Changed their cover picture
               </p>
             </div>
             <span>1 min ago</span>
           </div>
           <div className="user">
-            <div className="userInfo">
+          <div className="userInfo">
               <img
-                src="https://images.pexels.com/photos/18704284/pexels-photo-18704284.jpeg?cs=srgb&dl=pexels-phong-vo-18704284.jpg&fm=jpg"
+                src={currentUser.profilePic}
                 alt=""
               />
               <p>
-                <span>Ehsan Espandar</span> Changed their cover picture
+                <span>{currentUser.name}</span> Changed their cover picture
               </p>
             </div>
             <span>1 min ago</span>
           </div>
           <div className="user">
-            <div className="userInfo">
+          <div className="userInfo">
               <img
-                src="https://images.pexels.com/photos/18704284/pexels-photo-18704284.jpeg?cs=srgb&dl=pexels-phong-vo-18704284.jpg&fm=jpg"
+                src={currentUser.profilePic}
                 alt=""
               />
               <p>
-                <span>Ehsan Espandar</span> Changed their cover picture
+                <span>{currentUser.name}</span> Changed their cover picture
               </p>
             </div>
             <span>1 min ago</span>
@@ -77,41 +81,41 @@ function Rightbar() {
           <div className="user">
             <div className="userInfo">
               <img
-                src="https://images.pexels.com/photos/18704284/pexels-photo-18704284.jpeg?cs=srgb&dl=pexels-phong-vo-18704284.jpg&fm=jpg"
+                src={currentUser.profilePic}
                 alt=""
               />
               <div className="online" />
-              <span>Ehsan Espandar</span>
+              <span>{currentUser.name}</span>
             </div>
           </div>
           <div className="user">
-            <div className="userInfo">
+          <div className="userInfo">
               <img
-                src="https://images.pexels.com/photos/18704284/pexels-photo-18704284.jpeg?cs=srgb&dl=pexels-phong-vo-18704284.jpg&fm=jpg"
+                src={currentUser.profilePic}
                 alt=""
               />
               <div className="online" />
-              <span>Ehsan Espandar</span>
+              <span>{currentUser.name}</span>
             </div>
           </div>
           <div className="user">
-            <div className="userInfo">
+          <div className="userInfo">
               <img
-                src="https://images.pexels.com/photos/18704284/pexels-photo-18704284.jpeg?cs=srgb&dl=pexels-phong-vo-18704284.jpg&fm=jpg"
+                src={currentUser.profilePic}
                 alt=""
               />
               <div className="online" />
-              <span>Ehsan Espandar</span>
+              <span>{currentUser.name}</span>
             </div>
           </div>
           <div className="user">
-            <div className="userInfo">
+          <div className="userInfo">
               <img
-                src="https://images.pexels.com/photos/18704284/pexels-photo-18704284.jpeg?cs=srgb&dl=pexels-phong-vo-18704284.jpg&fm=jpg"
+                src={currentUser.profilePic}
                 alt=""
               />
               <div className="online" />
-              <span>Ehsan Espandar</span>
+              <span>{currentUser.name}</span>
             </div>
           </div>
         </div>
