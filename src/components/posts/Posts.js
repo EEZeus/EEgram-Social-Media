@@ -2,8 +2,9 @@ import Post from "../post/Post";
 import "./Posts.scss";
 
 function Posts() {
-  //Temporary data
 
+
+  //Temporary data
   const posts = [
     {
       id: 1,
