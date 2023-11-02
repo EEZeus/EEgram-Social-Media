@@ -14,12 +14,13 @@ $color-danger: #e40014;
   overscroll-behavior: none;
   position: sticky;
   top: 70px;
+  
   height: calc(100vh - 70px);
   &::-webkit-scrollbar {
     display: none;
   }
   .container {
-    padding: 20px;
+    padding: 10px;
     .item {
       background-color: themed('bg');
 
@@ -111,6 +112,12 @@ $color-danger: #e40014;
         }
       }
     }
+  }
+  @include mobile{
+    display: none;
+  }
+  @include tablet{
+    display: none;
   }
 }
 }

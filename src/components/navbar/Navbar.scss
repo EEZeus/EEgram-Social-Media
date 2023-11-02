@@ -46,6 +46,14 @@ $color-d: rgb(58, 89, 152);
           &:focus {
             outline: none;
           }
+
+          @include mobile{
+            display: none;
+          }
+          @include tablet{
+           width: 200px;
+          }
+
         }
       }
     }
@@ -72,6 +80,12 @@ $color-d: rgb(58, 89, 152);
 
         span {
         }
+        @include tablet{
+          display: none;
+        }
+      }
+      @include mobile{
+        display: none;
       }
     }
   }
