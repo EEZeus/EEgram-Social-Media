@@ -20,7 +20,10 @@ function Navbar(){
                 <Link to={'/'} style={{textDecoration:'none'}}>
                 <span>EEgram</span>
                 </Link>
+                <Link to={'/'} style={{textDecoration:'none',color: "inherit",
+                  cursor: "pointer",}}>
                 <HomeOutlinedIcon/>
+                </Link>
                 {!darkMode? <DarkModeOutlinedIcon style={{cursor:'pointer'}} onClick={()=>toggle()}/> : <WbSunnyOutlinedIcon onClick={()=>toggle()} style={{cursor:'pointer'}}/>}
                 <GridViewOutlinedIcon/>
                 <div className='search'>
