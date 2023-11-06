@@ -33,15 +33,19 @@ function Navbar(){
             </div>
             <div className='right'>
                 <PersonOutlinedIcon/>
+                <div className='email-icon'>
                 <EmailOutlinedIcon/>
+                </div>
+                <div className='notif-icon'>
                 <NotificationsNoneOutlinedIcon/>
+                </div>
                 <div className ='user'>
                     <img src={currentUser.profilePic} alt='avatar'/>
                     <span>{currentUser.name}</span>
                 </div>
             </div>
-
         </div>
+            
     )
 }
 

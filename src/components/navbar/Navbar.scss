@@ -8,29 +8,34 @@ $color-d: rgb(58, 89, 152);
     z-index: 1000;
     position: sticky;
     top: 0;
-    background-color: themed('bg');
+    background-color: themed("bg");
     display: flex;
     align-items: center;
     justify-content: space-between;
+    @include mobile {
+      justify-content: space-between;
+      gap: 10px;
+    }
     padding: 10px 20px;
     height: 50px;
-    border-bottom: 1px solid themed('border');
-    color:themed('textcolor');
+    border-bottom: 1px solid themed("border");
+    color: themed("textcolor");
+
     .left {
       display: flex;
       align-items: center;
-      gap: 30px;
+      gap: 20px;
       span {
         font-weight: bold;
         font-size: 20px;
-        color: themed('logo');
+        color: themed("logo");
       }
 
       .search {
         display: flex;
         align-items: center;
         gap: 10px;
-        border: 1px solid themed('border');
+        border: 1px solid themed("border");
         padding: 5px;
         border-radius: 5px;
         -webkit-border-radius: 5px;
@@ -39,21 +44,21 @@ $color-d: rgb(58, 89, 152);
         -o-border-radius: 5px;
 
         input {
-            background-color: transparent;
-            color:themed('textcolor');
+          background-color: transparent;
+          color: themed("textcolor");
           border: none;
           width: 400px;
           &:focus {
             outline: none;
           }
 
-          @include mobile{
-            display: none;
+          @include tablet {
+            width: 200px;
           }
-          @include tablet{
-           width: 200px;
+          @include mobile {
+            width: 50px;
+            font-size: 12px;
           }
-
         }
       }
     }
@@ -62,12 +67,25 @@ $color-d: rgb(58, 89, 152);
       display: flex;
       align-items: center;
       gap: 20px;
+      .email-icon {
+        @include mobile {
+          display: none;
+        }
+      }
+      .notif-icon {
+        @include mobile {
+          display: none;
+        }
+      }
       .user {
         display: flex;
         align-items: center;
         gap: 10px;
         font-weight: 500;
         img {
+          @include mobile {
+            display: none;
+          }
           width: 30px;
           height: 30px;
           border-radius: 50%;
@@ -79,13 +97,13 @@ $color-d: rgb(58, 89, 152);
         }
 
         span {
+          @include mobile {
+            display: none;
+          }
         }
-        @include tablet{
+        @include tablet {
           display: none;
         }
-      }
-      @include mobile{
-        display: none;
       }
     }
   }
