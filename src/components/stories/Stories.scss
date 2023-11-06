@@ -5,14 +5,15 @@
     height: 200px;
     margin-bottom: 30px;
 
-    @include mobile{
-        height: 50px;
-        justify-content: space-between;
-    }
-
+    
     @include tablet{
         height: 150px;
         gap: 20px;
+    }
+    @include mobile{
+        height: 80px;
+        justify-content: space-between;
+        align-items: center;
     }
     .story{
         position: relative;
@@ -25,13 +26,15 @@
         -o-border-radius: 10px;
         @include mobile{
             flex: none;
-            width: 50px;
-            height: 50px;
+            width: 60px;
+            height: 60px;
             border-radius: 50%;
             -webkit-border-radius: 50%;
             -moz-border-radius: 50%;
             -ms-border-radius: 50%;
             -o-border-radius: 50%;
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2),
+        0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
         img {
             width: 100%;
@@ -75,9 +78,9 @@
                 left: 0;
                 margin:auto;
                 transform: translate(33px,-6px);
-                width: 10px;
-                height: 10px;
-                font-size:10px ;
+                width: 15px;
+                height: 15px;
+                font-size:15px ;
                 -webkit-transform: translate(33px,-6px);
                 -moz-transform: translate(33px,-6px);
                 -ms-transform: translate(33px,-6px);
