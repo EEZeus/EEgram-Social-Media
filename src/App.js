@@ -15,6 +15,7 @@ import Profile from "./pages/profile/Profile";
 import { useContext } from "react";
 import { DarkModeContext } from "./Context/DarkModeContext";
 import { AuthContext } from "./Context/AuthContext";
+import { PersianContext } from "./Context/PersianContext";
 
 function App() {
 
@@ -22,9 +23,11 @@ const {currentUser} = useContext(AuthContext);
 
 const {darkMode} = useContext(DarkModeContext)
 
+ const { persian } = useContext(PersianContext);
+
 const Layout = () => {
   return (
-    <div className={`theme-${darkMode?'dark':'light'}`}>
+    <div className={`theme-${darkMode?'dark':'light'}`} dir={persian? 'rtl':'ltr'}>
       <Navbar />
       <div style={{ display: "flex" }}>
         <Leftbar />

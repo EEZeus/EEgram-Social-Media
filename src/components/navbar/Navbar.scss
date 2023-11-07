@@ -22,6 +22,16 @@ $color-d: rgb(58, 89, 152);
     color: themed("textcolor");
 
     .left {
+      img {
+        width: 35px;
+        border-radius: 3px;
+        overflow: hidden;
+        -webkit-border-radius: 3px;
+        -moz-border-radius: 3px;
+        -ms-border-radius: 3px;
+        -o-border-radius: 3px;
+        -webkit-border-radius: 3px;
+      }
       display: flex;
       align-items: center;
       gap: 20px;

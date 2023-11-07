@@ -14,9 +14,11 @@ import Courses from "../../assets/webinar.png";
 import Fund from "../../assets/saving.png";
 import { useContext } from "react";
 import { AuthContext } from "../../Context/AuthContext";
+import { PersianContext } from "../../Context/PersianContext";
 
 function Leftbar() {
   const {currentUser} = useContext(AuthContext)
+  const {persian} = useContext(PersianContext)
   return (
     <div className="leftbar">
       <div className="container">
@@ -29,64 +31,64 @@ function Leftbar() {
             <span>{currentUser.name}</span>
           </div>
           <div className="item">
-            <img src={Friends} alt="Friends" />
-            <span>Friends</span>
+            <img src={Friends} alt={!persian?'Friends':'دوستان'} />
+            <span>{!persian?'Friends':'دوستان'}</span>
           </div>
           <div className="item">
             <img src={Groups} alt="Groups" />
-            <span>Groups</span>
+            <span>{!persian?'Groups':'گروه ها'}</span>
           </div>
           <div className="item">
             <img src={Market} alt="Market" />
-            <span>Market</span>
+            <span>{!persian?'Market':'فروشگاه'}</span>
           </div>
           <div className="item">
             <img src={Watch} alt="Watch" />
-            <span>Watch</span>
+            <span>{!persian?'Watch':'تماشا'}</span>
           </div>
           <div className="item">
             <img src={Memories} alt="Memories" />
-            <span>Memories</span>
+            <span>{!persian?'Memories':'خاطرات'}</span>
           </div>
         </div>
         <hr/>
         <div className="menu">
-            <span>Your shortcuts</span>
+            <span>{!persian?'Your Shortcuts':'میانبر ها'}</span>
         <div className="item">
             <img src={Events} alt="Events" />
-            <span>Events</span>
+            <span>{!persian?'Events':'رویداد ها'}</span>
           </div>
           <div className="item">
             <img src={Gaming} alt="Gaming" />
-            <span>Gaming</span>
+            <span>{!persian?'Gaming':'بازی'}</span>
           </div>
           <div className="item">
             <img src={Gallery} alt="Gallery" />
-            <span>Gallery</span>
+            <span>{!persian?'Gallery':'گالری'}</span>
           </div>
           <div className="item">
             <img src={Videos} alt="Videos" />
-            <span>Videos</span>
+            <span>{!persian?'Videos':'ویدیو ها'}</span>
           </div>
           <div className="item">
             <img src={Messages} alt="Messages" />
-            <span>Messages</span>
+            <span>{!persian?'Messages':'پیام ها'}</span>
         </div>
         </div>
         <hr/>
         <div className="menu">
-            <span>Others</span>
+            <span>{!persian?'Others':'دیگر'}</span>
         <div className="item">
             <img src={Tutorials} alt="Tutorials" />
-            <span>Tutorials</span>
+            <span>{!persian?'Tutorials':'آموزش ها'}</span>
           </div>
           <div className="item">
             <img src={Courses} alt="Courses" />
-            <span>Courses</span>
+            <span>{!persian?'Courses':'دوره ها'}</span>
           </div>
           <div className="item">
             <img src={Fund} alt="Fund" />
-            <span>Fund</span>
+            <span>{!persian?'Fund':'مالی'}</span>
           </div>
         </div>
       </div>
