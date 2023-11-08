@@ -4,13 +4,14 @@ import FavoriteOutlinedIcon from "@mui/icons-material/FavoriteOutlined";
 import TextsmsOutlinedIcon from "@mui/icons-material/TextsmsOutlined";
 import ShareOutlinedIcon from "@mui/icons-material/ShareOutlined";
 import MoreHorizOutlinedIcon from "@mui/icons-material/MoreHorizOutlined";
-import { useState } from "react";
+import {PersianContext} from '../../Context/PersianContext'
+import { useContext, useState } from "react";
 import Comments from '../comments/Comments';
 import { NavLink } from "react-router-dom";
 
 function Post({ post }) {
   const [commentActive, setCommentActive] = useState(false);
-
+  const {persian} = useContext(PersianContext)
   //temporary logic
 
   const liked = false;
@@ -32,7 +33,7 @@ function Post({ post }) {
               >
                 <span className="name">{post.name}</span>
               </NavLink>
-              <span className="date">1 min ago</span>
+              <span className="date">{!persian? '1 min ago':'1 دقیقه پیش'}</span>
             </div>
           </div>
           <MoreHorizOutlinedIcon />
@@ -44,18 +45,18 @@ function Post({ post }) {
         <div className="info">
           <div className="item">
             {!liked ? <FavoriteBorderOutlinedIcon /> : <FavoriteOutlinedIcon />}
-            12 likes
+            {!persian? '12 likes':'12 پسند'}
           </div>
           <div
             className="item"
             onClick={() => setCommentActive(!commentActive)}
           >
             <TextsmsOutlinedIcon />
-            12 comments
+            {!persian? '12 comments':'12 نظر'}
           </div>
           <div className="item">
             <ShareOutlinedIcon />
-            share
+            {!persian? 'Share':'اشتراک گذاری'}
           </div>
         </div>
         {commentActive ? <Comments /> : null}

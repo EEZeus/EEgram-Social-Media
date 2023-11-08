@@ -2,10 +2,11 @@ import { useContext } from 'react';
 import './Comments.scss'
 import { AuthContext } from '../../Context/AuthContext';
 import SendOutlinedIcon from '@mui/icons-material/SendOutlined';
+import { PersianContext } from '../../Context/PersianContext';
 const Comments = () => {
 
     const {currentUser} = useContext(AuthContext)
-
+    const {persian} = useContext(PersianContext)
     //temp comments
 
     const comments = [
@@ -31,7 +32,8 @@ const Comments = () => {
     <div className='comments'>
         <div className='write'>
             <img src={currentUser.profilePic} alt=''/>
-            <input type='text' placeholder='Leave a comment ...'/>
+            <input type='text' placeholder={!persian? 'Leave a comment...':'نظری بنویس...'}
+/>
             <button><SendOutlinedIcon/></button>
         </div>
         {comments.map(comment => (
@@ -41,7 +43,7 @@ const Comments = () => {
                     <span>{comment.name}</span>
                     <p>{comment.desc}</p>
                 </div>
-                <span className='date'>1 hour ago</span>
+                <span className='date'>{!persian? '1  hour ago':'1 ساعت پیش'}</span>
             </div>
         ))}
     </div>

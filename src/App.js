@@ -27,7 +27,7 @@ const {darkMode} = useContext(DarkModeContext)
 
 const Layout = () => {
   return (
-    <div className={`theme-${darkMode?'dark':'light'}`} dir={persian? 'rtl':'ltr'}>
+    <div className={`theme-${darkMode?'dark':'light'} ${persian?'persian-font':null}`} dir={persian? 'rtl':'ltr'}>
       <Navbar />
       <div style={{ display: "flex" }}>
         <Leftbar />
