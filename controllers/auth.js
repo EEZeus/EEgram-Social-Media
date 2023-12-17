@@ -8,7 +8,7 @@ export const signup = (req, res) => {
   db.query(q1, [req.body.username], (err, data) => {
     if (err) return res.status(500).json(err);
     if (data.length) return res.status(409).json("User already exists !");
-  });
+  
   //create new user
   //hash pass
   const salt = bcrypt.genSaltSync(10);
@@ -23,6 +23,7 @@ export const signup = (req, res) => {
     if (err) return res.status(500).json(err);
     return res.status(200).json("User has been created successfully");
   });
+});
 };
 
 export const login = (req, res) => {
