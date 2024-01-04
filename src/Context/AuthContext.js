@@ -1,13 +1,16 @@
 import { createContext,useEffect,useState } from "react";
-
+import axios from 'axios'
 export const AuthContext = createContext()
 
 export const AuthContextProvider =({children})=>{
 const [currentUser,setCurrentUser] = useState(JSON.parse(localStorage.getItem('user'))|| null)
 
-const login = ()=>{
+const login = async(inputs)=>{
     // need to be fetched from backend
-    setCurrentUser({id:1,name:'Ehsan Espandar',profilePic:'https://images.pexels.com/photos/18704284/pexels-photo-18704284.jpeg?cs=srgb&dl=pexels-phong-vo-18704284.jpg&fm=jpg'})
+  const res =  await axios.post('http://localhost:8800/server/auth/login',inputs,{
+    withCredentials:true
+  })
+  setCurrentUser(res.data)
 }
 
 useEffect(()=>{

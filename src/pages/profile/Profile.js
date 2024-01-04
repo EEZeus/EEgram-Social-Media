@@ -10,20 +10,22 @@ import MoreVertIcon from "@mui/icons-material/MoreVert";
 import Posts from "../../components/posts/Posts";
 import { useContext } from "react";
 import { PersianContext } from "../../Context/PersianContext";
+import { AuthContext } from "../../Context/AuthContext";
 
 function Profile() {
   const { persian } = useContext(PersianContext);
+  const {currentUser} = useContext(AuthContext)
   return (
     <div className="profile">
       <div className="images">
         <img
           className="cover"
-          src="https://images.pexels.com/photos/268941/pexels-photo-268941.jpeg?cs=srgb&dl=pexels-pixabay-268941.jpg&fm=jpg"
+          src={currentUser.coverPic}
           alt=""
         />
         <img
           className="profilePic"
-          src="https://images.pexels.com/photos/15422042/pexels-photo-15422042.jpeg?cs=srgb&dl=pexels-aghashukur-mammadli-15422042.jpg&fm=jpg"
+          src={currentUser.profilePic}
           alt=""
         />
       </div>
@@ -44,15 +46,15 @@ function Profile() {
             </a>
           </div>
           <div className="center">
-            <span>Ehsan Espandar</span>
+            <span>{currentUser.name}</span>
             <div className="info">
               <div className="item">
                 <PlaceIcon />
-                <span>Kurdistan</span>
+                <span>{currentUser.city}</span>
               </div>
               <div className="item">
                 <LanguageIcon />
-                <span>EEgram.dev</span>
+                <span>{currentUser.website}</span>
               </div>
             </div>
             <button>{!persian ? "Follow" : "دنبال کردن"}</button>

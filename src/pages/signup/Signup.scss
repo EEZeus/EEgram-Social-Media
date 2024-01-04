@@ -2,7 +2,7 @@ $color-a : rgb(246,246,246);
 $color-b : rgb(223,227,238);
 $color-c : rgb(139,157,195);
 $color-d : rgb(58,89,152);
-
+@import "../../style.scss";
 .signup{
     height: 100vh;
     background-color:($color-a) ;
@@ -22,6 +22,16 @@ $color-d : rgb(58,89,152);
         -o-border-radius:10px ;
         min-height: 350px;
         overflow: hidden;
+        @include tablet{
+            flex-direction:column;
+            width: 70%;
+
+        }
+        @include mobile{
+            flex-direction:column;
+            width: 80%;
+
+        }
         .left{
             flex:1;
             background:linear-gradient(rgba(58,89,152,0.7),rgba(39, 39, 41, 0.4)),url('./assets/signup-background-img.jpg') center;

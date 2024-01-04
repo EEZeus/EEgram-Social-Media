@@ -16,6 +16,7 @@ import { useContext } from "react";
 import { DarkModeContext } from "./Context/DarkModeContext";
 import { AuthContext } from "./Context/AuthContext";
 import { PersianContext } from "./Context/PersianContext";
+import {QueryClient,QueryClientProvider} from '@tanstack/react-query'
 
 function App() {
 
@@ -25,8 +26,11 @@ const {darkMode} = useContext(DarkModeContext)
 
  const { persian } = useContext(PersianContext);
 
+ const queryClient = new QueryClient()
+
 const Layout = () => {
   return (
+    <QueryClientProvider client={queryClient}>
     <div className={`theme-${darkMode?'dark':'light'} ${persian?'persian-font':null}`} dir={persian? 'rtl':'ltr'}>
       <Navbar />
       <div style={{ display: "flex" }}>
@@ -37,6 +41,7 @@ const Layout = () => {
         <Rightbar />
       </div>
     </div>
+</QueryClientProvider>
   );
 };
 
