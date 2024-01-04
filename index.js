@@ -9,8 +9,15 @@ import cookieParser from "cookie-parser";
 import cors from 'cors'
 const app = Express();
 //middleware
+app.use((req,res,next)=>{
+  res.header('Access-Control-Allow-Credentials',true)
+  next()
+})
 app.use(Express.json());
-app.use(cors())
+app.use(cors({
+  origin: 'http://localhost:3000',
+}
+))
 app.use(cookieParser())
 
 

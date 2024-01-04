@@ -9,6 +9,12 @@ export const signup = (req, res) => {
     if (err) return res.status(500).json(err);
     if (data.length) return res.status(409).json("User already exists !");
   
+  const q4 = "SELECT * FROM users WHERE email = ?";
+
+  db.query(q4, [req.body.email], (err, data) => {
+    if (err) return res.status(500).json(err);
+    if (data.length) return res.status(409).json("This email has been already used !");
+  
   //create new user
   //hash pass
   const salt = bcrypt.genSaltSync(10);
@@ -23,6 +29,7 @@ export const signup = (req, res) => {
     if (err) return res.status(500).json(err);
     return res.status(200).json("User has been created successfully");
   });
+});
 });
 };
 
