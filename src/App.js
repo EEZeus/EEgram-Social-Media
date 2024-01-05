@@ -16,8 +16,7 @@ import { useContext } from "react";
 import { DarkModeContext } from "./Context/DarkModeContext";
 import { AuthContext } from "./Context/AuthContext";
 import { PersianContext } from "./Context/PersianContext";
-import {QueryClient,QueryClientProvider} from '@tanstack/react-query'
-
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 function App() {
 
 const {currentUser} = useContext(AuthContext);

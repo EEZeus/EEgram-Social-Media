@@ -21,7 +21,7 @@ function Post({ post }) {
       <div className="container">
         <div className="user">
           <div className="userInfo">
-            <img src={post.profilePic} alt="profilePic" />
+            <img src={post.profilePic} alt="" />
             <div className="details">
               <NavLink
                 to={`/profile/${post.userId}`}
@@ -40,7 +40,7 @@ function Post({ post }) {
         </div>
         <div className="content">
           <p>{post.desc}</p>
-          <img src={post.img} alt="" />
+          <img src={"./upload/"+post.img} alt="" />
         </div>
         <div className="info">
           <div className="item">

@@ -4,21 +4,29 @@ import Post from "../post/Post";
 import "./Posts.scss";
 
 function Posts() {
+  const { isLoading, error, data } = useQuery({
+    queryKey: ['posts'],
+    queryFn: () => makeRequest.get('/posts').then(res => res.data),
+  });
 
+  console.log(data);
 
-  const { isLoading, error, data } = useQuery('posts', () =>
-    makeRequest.get('/posts').then(res =>{
-      return res.data
-    })
-)
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <div>Error: {error.message}</div>;
+  }
 
   return (
     <div className="posts">
-      {data.map((post) => (
-        <Post post={post} key={post.id}/>
+      {data && data.map(post => (
+        <Post post={post} key={post.id} />
       ))}
     </div>
   );
 }
+
 
 export default Posts;
