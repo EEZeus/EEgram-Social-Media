@@ -11,55 +11,77 @@ import { makeRequest } from "../../axios";
 const Share = () => {
   const [file, setFile] = useState(null);
   const [desc, setDesc] = useState("");
+  const [isLoading, setIsLoading] = useState(false); // New loading state
 
   const upload = async () => {
     try {
+      setIsLoading(true);
+
       const formData = new FormData();
       formData.append("file", file);
-      const res = await makeRequest.post('/upload',formData)
-      console.log(res.data)
-      return res.data
+     
+      const res = await makeRequest.post("/upload", formData);
+
+      return res.data;
     } catch (err) {
-      console.log(err);
+      if (err.code === "ECONNABORTED") {
+        console.log("Request aborted: The upload took too long.");
+      } else {
+        console.error(err);
+      }
+    } finally {
+      setIsLoading(false);
     }
   };
+
   const { currentUser } = useContext(AuthContext);
   const { persian } = useContext(PersianContext);
-
   const queryClient = useQueryClient();
 
   const mutation = useMutation({
     mutationFn: (newPost) => {
       return makeRequest.post("/posts", newPost);
     },
-
     onSuccess: () => {
-      // Invalidate and refetch
       queryClient.invalidateQueries(["posts"]);
     },
   });
 
   const handleClick = async (e) => {
     e.preventDefault();
-    let imgUrl = '';
-    if(file) imgUrl = await upload();
-   mutation.mutate({ desc,img:imgUrl });
+
+    let imgUrl = "";
+    if (file) {
+      imgUrl = await upload();
+    }
+
+    if (imgUrl) {
+      mutation.mutate({ desc, img: imgUrl });
+    }
+
+    setDesc('')
+    setFile(null)
   };
 
   return (
     <div className="share">
       <div className="container">
         <div className="top">
-          <img src={currentUser.profilePic} alt="" />
-          <input
-            type="text"
-            placeholder={
-              !persian
-                ? `What's on your mind ${currentUser.name}?`
-                : `چی توی ذهنته ${currentUser.name}؟`
-            }
-            onChange={(e) => setDesc(e.target.value)}
-          />
+          <div className="left">
+            <img src={currentUser.profilePic} alt="" />
+            <input
+              type="text"
+              placeholder={
+                !persian
+                  ? `What's on your mind ${currentUser.name}?`
+                  : `چی توی ذهنته ${currentUser.name}؟`
+              }
+              onChange={(e) => setDesc(e.target.value)}
+            />
+          </div>
+          <div className="right">
+            {file && <img className="file" alt="" src={URL.createObjectURL(file)}/>}
+          </div>
         </div>
         <hr />
         <div className="bottom">

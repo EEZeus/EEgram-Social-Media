@@ -9,8 +9,6 @@ function Posts() {
     queryFn: () => makeRequest.get('/posts').then(res => res.data),
   });
 
-  console.log(data);
-
   if (isLoading) {
     return <div>Loading...</div>;
   }

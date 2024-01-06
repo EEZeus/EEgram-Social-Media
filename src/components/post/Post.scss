@@ -47,9 +47,9 @@
       }
 
       .content{
-
         p{
-
+          display: flex;
+          justify-self: flex-start;
         }
 
         img{
