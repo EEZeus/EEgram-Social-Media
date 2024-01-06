@@ -14,7 +14,7 @@ function Post({ post }) {
   const { persian } = useContext(PersianContext);
   //temporary logic
 
-  const liked = false;
+  const liked = true;
 
   return (
     <div className="post">
@@ -34,12 +34,15 @@ function Post({ post }) {
                 <span className="name">{post.name}</span>
               </NavLink>
               <span className="date">
-                {!persian
+              {!persian
                   ? moment(post.createdAt).fromNow()
                   : moment(post.createdAt)
                       .fromNow()
                       .replace("minutes", "دقیقه")
                       .replace("minute", "دقیقه")
+                      .replace("seconds", "ثانیه")
+                      .replace("second", "ثانیه")
+                      .replace("a few", "چند")
                       .replace("ago", "پیش")
                       .replace("an", "یک")
                       .replace("day", "روز")
@@ -57,7 +60,7 @@ function Post({ post }) {
         </div>
         <div className="info">
           <div className="item">
-            {!liked ? <FavoriteBorderOutlinedIcon /> : <FavoriteOutlinedIcon />}
+            {!liked ? <FavoriteBorderOutlinedIcon /> : <FavoriteOutlinedIcon style={{color:"red"}}/>}
             {!persian ? "12 likes" : "12 پسند"}
           </div>
           <div
@@ -72,7 +75,7 @@ function Post({ post }) {
             {!persian ? "Share" : "اشتراک گذاری"}
           </div>
         </div>
-        {commentActive ? <Comments /> : null}
+        {commentActive ? <Comments postId={post.id} /> : null}
       </div>
     </div>
   );

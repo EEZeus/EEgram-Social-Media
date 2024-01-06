@@ -3,6 +3,7 @@
 .comments {
   @include themify($themes) {
     display: flex;
+    justify-self: flex-start;
     flex-direction: column;
     gap: 2px;
 
