@@ -11,23 +11,57 @@ import Posts from "../../components/posts/Posts";
 import { useContext } from "react";
 import { PersianContext } from "../../Context/PersianContext";
 import { AuthContext } from "../../Context/AuthContext";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { makeRequest } from "../../axios";
+import { useLocation } from "react-router-dom";
 
 function Profile() {
   const { persian } = useContext(PersianContext);
-  const {currentUser} = useContext(AuthContext)
-  return (
+  const { currentUser } = useContext(AuthContext);
+
+  const userId = useLocation().pathname.split('/')[2]
+
+
+  const { isLoading, error, data } = useQuery({
+    queryKey: ["user"],
+    queryFn: () =>
+      makeRequest.get("/users/find/" + userId).then((res) => res.data),
+  });
+
+  const { isLoading:rIsLoading,data:relationshipData } = useQuery({
+    queryKey: ["relationships"],
+    queryFn: () =>
+      makeRequest.get("/relationships?followedId=" + userId).then((res) => res.data),
+  });
+
+  const queryClient = useQueryClient();
+  
+  const mutation = useMutation({
+    mutationFn: (following) => {
+      if(following) return makeRequest.delete("/relationships?userId="+userId);
+      return makeRequest.post('/relationships',{userId})
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries(["relationship"]);
+    },
+  });
+
+    const handleFollow = () => {
+      mutation.mutate(relationshipData.includes(currentUser.id));
+
+    }
+
+
+
+if(isLoading){
+  return <div>Data is loading ...</div>
+}
+
+return (
     <div className="profile">
       <div className="images">
-        <img
-          className="cover"
-          src={currentUser.coverPic}
-          alt=""
-        />
-        <img
-          className="profilePic"
-          src={currentUser.profilePic}
-          alt=""
-        />
+        <img className="cover" src={data.coverPic} alt="" />
+        <img className="profilePic" src={data.profilePic} alt="" />
       </div>
       <div className="profileContainer">
         <div className="uInfo">
@@ -46,25 +80,28 @@ function Profile() {
             </a>
           </div>
           <div className="center">
-            <span>{currentUser.name}</span>
+            <span>{data.name}</span>
             <div className="info">
               <div className="item">
                 <PlaceIcon />
-                <span>{currentUser.city}</span>
+                <span>{data.city}</span>
               </div>
               <div className="item">
                 <LanguageIcon />
-                <span>{currentUser.website}</span>
+                <span>{data.website}</span>
               </div>
             </div>
-            <button>{!persian ? "Follow" : "دنبال کردن"}</button>
+            {+userId === currentUser.id? (<button>Update</button>):
+              rIsLoading ? (<div>'loding...'</div>):(<button onClick={handleFollow} style={{backgroundColor:`${relationshipData.includes(currentUser.id)?'grey':'rgb(58, 89, 152)'}`}}>{!relationshipData.includes(currentUser.id)?(!persian ? "Follow" : "دنبال کردن"):(!persian ? "Following" : "دنبال شده")}</button>)
+            
+            }
           </div>
           <div className="right">
             <EmailOutlinedIcon />
             <MoreVertIcon />
           </div>
         </div>
-        <Posts />
+        <Posts userId ={userId}/>
       </div>
     </div>
   );
