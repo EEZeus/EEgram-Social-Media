@@ -12,9 +12,11 @@ import moment from "moment";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { makeRequest } from "../../axios";
 import { AuthContext } from "../../Context/AuthContext";
+import { fabClasses } from "@mui/material";
 
 function Post({ post }) {
   const [commentActive, setCommentActive] = useState(false);
+  const [menuOpen,setMenuOpen] = useState(false)
   const { persian } = useContext(PersianContext);
   const { currentUser } = useContext(AuthContext);
 
@@ -36,6 +38,15 @@ function Post({ post }) {
     },
   });
 
+  const deleteMutation = useMutation({
+    mutationFn: (postId) => {
+      return makeRequest.delete('/posts/'+postId)
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries(["posts"]);
+    },
+  });
+
     const handleLike = () => {
       if (!data) {
         console.log("Likes data is not available yet.");
@@ -47,13 +58,17 @@ function Post({ post }) {
     }
   };
 
+  const handleDelete = ()=>{
+    deleteMutation.mutate(post.id)
+  }
+
 
   return (
     <div className="post">
       <div className="container">
         <div className="user">
           <div className="userInfo">
-            <img src={post.profilePic} alt="" />
+            <img src={"../../../upload/" + post.profilePic} alt="" />
             <div className="details">
               <NavLink
                 to={`/profile/${post.userId}`}
@@ -85,11 +100,14 @@ function Post({ post }) {
               </span>
             </div>
           </div>
-          <MoreHorizOutlinedIcon />
+          <div className="drop">
+          {post.userId === currentUser.id && <MoreHorizOutlinedIcon onClick={()=>setMenuOpen(!menuOpen)} />}
+          {menuOpen && <button onClick={handleDelete}>Delete</button>}
+          </div>
         </div>
         <div className="content">
           <p>{post.desc}</p>
-          <img src={"./upload/" + post.img} alt="" />
+          <img src={"../../../upload/" + post.img} alt="" />
         </div>
         <div className="info">
           <div className="item">
