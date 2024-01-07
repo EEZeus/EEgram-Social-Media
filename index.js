@@ -2,6 +2,7 @@ import Express from "express";
 import usersRoute from "./routes/users.js";
 import postsRoute from "./routes/posts.js";
 import likesRoute from "./routes/likes.js";
+import relationshipsRoute from "./routes/relationships.js";
 import commentsRoute from "./routes/comments.js";
 import storiesRoute from "./routes/stories.js";
 import authRoute from "./routes/auth.js";
@@ -36,6 +37,7 @@ app.post('/server/upload',upload.single('file'), (req,res)=>{
  const file = req.file;
   res.status(200).json(file.filename)
 })
+app.use("/server/relationships",relationshipsRoute)
 app.use("/server/users", usersRoute);
 app.use("/server/posts", postsRoute);
 app.use("/server/likes", likesRoute);
