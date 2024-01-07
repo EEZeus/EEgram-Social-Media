@@ -9,12 +9,44 @@ import { useContext, useState } from "react";
 import Comments from "../comments/Comments";
 import { NavLink } from "react-router-dom";
 import moment from "moment";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { makeRequest } from "../../axios";
+import { AuthContext } from "../../Context/AuthContext";
+
 function Post({ post }) {
   const [commentActive, setCommentActive] = useState(false);
   const { persian } = useContext(PersianContext);
-  //temporary logic
+  const { currentUser } = useContext(AuthContext);
 
-  const liked = true;
+  const { isLoading, error, data } = useQuery({
+    queryKey: ["likes", post.id],
+    queryFn: () =>
+      makeRequest.get("/likes?postId=" + post.id).then((res) => res.data),
+  });
+
+  const queryClient = useQueryClient();
+  
+  const mutation = useMutation({
+    mutationFn: (liked) => {
+      if(liked) return makeRequest.delete("/likes?postId="+post.id);
+      return makeRequest.post('/likes',{postId:post.id})
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries(["likes"]);
+    },
+  });
+
+    const handleLike = () => {
+      if (!data) {
+        console.log("Likes data is not available yet.");
+        return;
+      }
+
+    if (!mutation.isLoading && data) {
+      mutation.mutate(data.includes(currentUser.id));
+    }
+  };
+
 
   return (
     <div className="post">
@@ -34,7 +66,7 @@ function Post({ post }) {
                 <span className="name">{post.name}</span>
               </NavLink>
               <span className="date">
-              {!persian
+                {!persian
                   ? moment(post.createdAt).fromNow()
                   : moment(post.createdAt)
                       .fromNow()
@@ -45,6 +77,7 @@ function Post({ post }) {
                       .replace("a few", "چند")
                       .replace("ago", "پیش")
                       .replace("an", "یک")
+                      .replace("a", "یک")
                       .replace("day", "روز")
                       .replace("days", "روز")
                       .replace("hour", "ساعت")
@@ -60,8 +93,21 @@ function Post({ post }) {
         </div>
         <div className="info">
           <div className="item">
-            {!liked ? <FavoriteBorderOutlinedIcon /> : <FavoriteOutlinedIcon style={{color:"red"}}/>}
-            {!persian ? "12 likes" : "12 پسند"}
+          {!isLoading ? (
+            <>
+              {data && !data.includes(+currentUser.id) ? (
+                <FavoriteBorderOutlinedIcon onClick={handleLike} />
+              ) : (
+                <FavoriteOutlinedIcon
+                  style={{ color: "red" }}
+                  onClick={handleLike}
+                />
+              )}
+              {!persian ? `${data.length} Likes` : `${data.length} پسند`}
+            </>
+          ) : (
+            'Loading ...'
+          )}
           </div>
           <div
             className="item"
@@ -80,5 +126,4 @@ function Post({ post }) {
     </div>
   );
 }
-
 export default Post;
