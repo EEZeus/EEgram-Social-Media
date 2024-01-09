@@ -47,7 +47,7 @@ function Login() {
           <form action="">
             <input type="text" placeholder="Username" name="username" onChange={handleChange} />
             <input type="password" placeholder="Password" name="password" onChange={handleChange}/>
-            {err && err}
+            {err && <div style={{color:'red',fontSize:'14px'}}>{err}</div>}
             <button onClick={handleLogin}>Log in</button>
           </form>
         </div>

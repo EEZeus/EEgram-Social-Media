@@ -65,7 +65,7 @@ const Share = () => {
       <div className="container">
         <div className="top">
           <div className="left">
-            <img src={currentUser.profilePic} alt="" />
+            <img src={currentUser.profilePic?"../../../upload/"+currentUser.profilePic:'https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Default_pfp.svg/1024px-Default_pfp.svg.png'} alt="" />
             <input
               type="text"
               placeholder={
@@ -95,14 +95,6 @@ const Share = () => {
                 <span>{!persian ? `Add Image` : `اضافه کردن عکس`}</span>
               </div>
             </label>
-            <div className="item">
-              <img src={Map} alt="" />
-              <span>{!persian ? `Add Place` : `اضافه کردن مکان`}</span>
-            </div>
-            <div className="item">
-              <img src={Friend} alt="" />
-              <span>{!persian ? `Tag Friends` : `تگ کردن دوستان`}</span>
-            </div>
           </div>
           <div className="right">
             <button onClick={handleClick}>

@@ -1,16 +1,18 @@
 import { useQuery } from "@tanstack/react-query";
 import { makeRequest } from "../../axios";
 import Post from "../post/Post";
+import Loading from '../loading/Loading'
 import "./Posts.scss";
 
 function Posts({userId}) {
   const { isLoading, error, data } = useQuery({
     queryKey: ['posts'],
     queryFn: () => makeRequest.get('/posts?userId='+userId).then(res => res.data),
+    retry:2
   });
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <Loading/>;
   }
 
   if (error) {

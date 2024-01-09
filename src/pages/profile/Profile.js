@@ -15,6 +15,7 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { makeRequest } from "../../axios";
 import { useLocation } from "react-router-dom";
 import Update from '../../components/update/Update'
+import Loading from "../../components/loading/Loading";
 function Profile() {
   const { persian } = useContext(PersianContext);
   const { currentUser } = useContext(AuthContext);
@@ -62,26 +63,12 @@ if(isLoading){
 return (
     <div className="profile">
       <div className="images">
-        <img className="cover" src={'../../../upload/'+data.coverPic} alt="" />
-        <img className="profilePic" src={'../../../upload/'+data.profilePic} alt="" />
+        <img className="cover" src={data.coverPic?'../../../upload/'+data.coverPic:'https://tokystorage.s3.amazonaws.com/images/default-cover.png'} alt="" />
+        <img className="profilePic" src={data.profilePic?'../../../upload/'+data.profilePic:'https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Default_pfp.svg/1024px-Default_pfp.svg.png'} alt="" />
       </div>
       <div className="profileContainer">
         <div className="uInfo">
           <div className="left">
-            <a href="http://www.facebook.com">
-              <FacebookOutlinedIcon fontSize="large" />
-            </a>
-            <a href="http://www.instagram.com">
-              <InstagramIcon fontSize="large" />
-            </a>
-            <a href="http://www.twitter.com">
-              <TwitterIcon fontSize="large" />
-            </a>
-            <a href="http://www.linkedin.com">
-              <LinkedInIcon fontSize="large" />
-            </a>
-          </div>
-          <div className="center">
             <span>{data.name}</span>
             <div className="info">
               <div className="item">
@@ -92,18 +79,18 @@ return (
                 <LanguageIcon />
                 <span>{data.website}</span>
               </div>
-            </div>
-            {+userId === currentUser.id? (<button onClick={()=>setOpenUpdate(true)}>Update</button>):
-              rIsLoading ? (<div>'loding...'</div>):(<button onClick={handleFollow} style={{backgroundColor:`${relationshipData.includes(currentUser.id)?'grey':'rgb(58, 89, 152)'}`}}>{!relationshipData.includes(currentUser.id)?(!persian ? "Follow" : "دنبال کردن"):(!persian ? "Following" : "دنبال شده")}</button>)
+          </div>
+          
+            
+          </div>
+          <div className="right">
+          {+userId === currentUser.id? (<button onClick={()=>setOpenUpdate(true)}>Update</button>):
+              rIsLoading ? (<Loading/>):(<button onClick={handleFollow} style={{backgroundColor:`${relationshipData.includes(currentUser.id)?'grey':'rgb(58, 89, 152)'}`}}>{!relationshipData.includes(currentUser.id)?(!persian ? "Follow" : "دنبال کردن"):(!persian ? "Following" : "دنبال شده")}</button>)
             
             }
           </div>
-          <div className="right">
-            <EmailOutlinedIcon />
-            <MoreVertIcon />
-          </div>
         </div>
-        <Posts userId ={userId}/>
+        <Posts userId ={userId} />
       </div>
       {openUpdate && <Update setOpenUpdate={setOpenUpdate} user={data}/>}
     </div>

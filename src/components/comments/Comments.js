@@ -6,11 +6,12 @@ import { PersianContext } from "../../Context/PersianContext";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { makeRequest } from "../../axios";
 import moment from "moment";
+import Loading from "../loading/Loading";
 const Comments = ({ postId }) => {
   const [desc, setDesc] = useState("");
   const { currentUser } = useContext(AuthContext);
   const { persian } = useContext(PersianContext);
-  //temp comments
+
   const { isLoading, error, data } = useQuery({
     queryKey: ["comments"],
     queryFn: () =>
@@ -38,10 +39,17 @@ const Comments = ({ postId }) => {
   return (
     <div className="comments">
       <div className="write">
-        <img src={currentUser.profilePic} alt="" />
+        <img
+          src={
+            currentUser.profilePic
+              ? "../../../upload/" + currentUser.profilePic
+              : "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Default_pfp.svg/1024px-Default_pfp.svg.png"
+          }
+          alt=""
+        />
         <input
-        onChange={e => setDesc(e.target.value)}
-        value={desc}
+          onChange={(e) => setDesc(e.target.value)}
+          value={desc}
           type="text"
           placeholder={!persian ? "Leave a comment..." : "نظری بنویس..."}
         />
@@ -49,35 +57,44 @@ const Comments = ({ postId }) => {
           <SendOutlinedIcon />
         </button>
       </div>
-      {isLoading
-        ? "loding ..."
-        : data.map((comment) => (
-            <div className="comment" key={comment.id}>
-              <img src={comment.profilePic} alt="" />
-              <div className="info">
-                <span>{comment.name}</span>
-                <p>{comment.desc}</p>
-              </div>
-              <span className="date">
-                {!persian
-                  ? moment(comment.createdAt).fromNow()
-                  : moment(comment.createdAt)
-                      .fromNow()
-                      .replace("minutes", "دقیقه")
-                      .replace("minute", "دقیقه")
-                      .replace("seconds", "ثانیه")
-                      .replace("second", "ثانیه")
-                      .replace("a few", "چند")
-                      .replace("ago", "پیش")
-                      .replace("an", "یک")
-                      .replace("a", "یک")
-                      .replace("day", "روز")
-                      .replace("days", "روز")
-                      .replace("hour", "ساعت")
-                      .replace("hours", "ساعت")}
-              </span>
+      {isLoading ? (
+        <Loading />
+      ) : (
+        data.map((comment) => (
+          <div className="comment" key={comment.id}>
+            <img
+              src={
+                currentUser.profilePic
+                  ? "../../../upload/" + currentUser.profilePic
+                  : "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Default_pfp.svg/1024px-Default_pfp.svg.png"
+              }
+              alt=""
+            />
+            <div className="info">
+              <span>{comment.name}</span>
+              <p>{comment.desc}</p>
             </div>
-          ))}
+            <span className="date">
+              {!persian
+                ? moment(comment.createdAt).fromNow()
+                : moment(comment.createdAt)
+                    .fromNow()
+                    .replace("minutes", "دقیقه")
+                    .replace("minute", "دقیقه")
+                    .replace("seconds", "ثانیه")
+                    .replace("second", "ثانیه")
+                    .replace("a few", "چند")
+                    .replace("ago", "پیش")
+                    .replace("an", "یک")
+                    .replace("a", "یک")
+                    .replace("day", "روز")
+                    .replace("days", "روز")
+                    .replace("hour", "ساعت")
+                    .replace("hours", "ساعت")}
+            </span>
+          </div>
+        ))
+      )}
     </div>
   );
 };
