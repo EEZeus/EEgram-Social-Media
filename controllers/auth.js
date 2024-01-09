@@ -35,7 +35,6 @@ export const signup = (req, res) => {
 
 export const login = (req, res) => {
   const q3 = "SELECT * FROM users WHERE username = ?";
-
   db.query(q3, [req.body.username], (err, data) => {
     if (err) return res.status(500).json(err);
     if (data.length == 0) return res.status(404).json("User not found !");
@@ -44,7 +43,6 @@ export const login = (req, res) => {
     if (!passIsTrue)
       return res.status(400).json("Wrong password or username !");
     const token = jwt.sign({ id: data[0].id }, "secretkey");
-    console.log(data[0].id)
     const { password, ...others } = data[0];
     res
       .cookie("accessToken", token, { httpOnly: true })
@@ -52,9 +50,22 @@ export const login = (req, res) => {
       .json(others);
   });
 };
+export const checkAuth = (req,res)=>{
+  const userId = req.query.userId;
+  const token = req.cookies.accessToken;
+ 
+  if (!token) return res.status(401).json("Not Logged In !");
+
+  jwt.verify(token, "secretkey", (err, userInfo) => {
+    if (err) return res.status(403).json("Token is not valid !");})
+
+  return res.status(200).json('User is logged in ...')
+}
+
 export const logout = (req, res) => {
   res.clearCookie('accessToken',{
     secure:true,
     sameSite:'none'
   }).status(200).json('User has been logged Out !')
+  
 };

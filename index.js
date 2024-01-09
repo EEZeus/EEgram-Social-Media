@@ -6,9 +6,12 @@ import relationshipsRoute from "./routes/relationships.js";
 import commentsRoute from "./routes/comments.js";
 import storiesRoute from "./routes/stories.js";
 import authRoute from "./routes/auth.js";
+import translateRoute from './routes/translate.js'
 import cookieParser from "cookie-parser";
 import cors from 'cors'
 import multer from "multer";
+import {translate} from 'free-translate';
+
 const app = Express();
 //middleware
 app.use((req,res,next)=>{
@@ -44,7 +47,10 @@ app.use("/server/likes", likesRoute);
 app.use("/server/comments", commentsRoute);
 app.use("/server/stories", storiesRoute);
 app.use("/server/auth", authRoute);
+app.use("/server/translate", translateRoute);
+
 
 app.listen(8800, () => {
   console.log("Server is Working!");
+  
 });
