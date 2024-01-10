@@ -17,7 +17,8 @@ app.use((req,res,next)=>{
   res.header('Access-Control-Allow-Credentials',true)
   next()
 })
-app.use(Express.json());
+app.use(Express.json({ limit: '50mb' }));
+app.use(Express.urlencoded({ limit: '50mb', extended: true }));
 app.use(cors({
   origin: 'http://localhost:3000',
 }
