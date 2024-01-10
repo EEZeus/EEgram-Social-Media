@@ -4,7 +4,6 @@ import postsRoute from "./routes/posts.js";
 import likesRoute from "./routes/likes.js";
 import relationshipsRoute from "./routes/relationships.js";
 import commentsRoute from "./routes/comments.js";
-import storiesRoute from "./routes/stories.js";
 import authRoute from "./routes/auth.js";
 import translateRoute from './routes/translate.js'
 import cookieParser from "cookie-parser";
@@ -45,7 +44,6 @@ app.use("/server/users", usersRoute);
 app.use("/server/posts", postsRoute);
 app.use("/server/likes", likesRoute);
 app.use("/server/comments", commentsRoute);
-app.use("/server/stories", storiesRoute);
 app.use("/server/auth", authRoute);
 app.use("/server/translate", translateRoute);
 
