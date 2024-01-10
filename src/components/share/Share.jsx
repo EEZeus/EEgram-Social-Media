@@ -1,13 +1,11 @@
 import "./share.scss";
 import Image from "../../assets/img.png";
-import Map from "../../assets/map.png";
-import Friend from "../../assets/friend.png";
 import { useContext, useState } from "react";
 import { AuthContext } from "../../Context/AuthContext";
 import { PersianContext } from "../../Context/PersianContext";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { makeRequest } from "../../axios";
-
+import Swal from 'sweetalert2';
 const Share = () => {
   const [file, setFile] = useState(null);
   const [desc, setDesc] = useState("");
@@ -53,8 +51,16 @@ const Share = () => {
     if (file) {
       imgUrl = await upload();
     }
-
-      mutation.mutate({ desc, img: imgUrl });
+      if(imgUrl || desc){
+        mutation.mutate({ desc, img: imgUrl });
+      }else{
+        Swal.fire({
+          title: 'Empty Post!',
+          text: 'Please add some content.',
+          icon: 'error',
+          confirmButtonText: 'OK',
+        });
+      }
 
     setDesc('')
     setFile(null)

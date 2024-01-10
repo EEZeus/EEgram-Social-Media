@@ -10,7 +10,7 @@ import {
 import Navbar from "./components/navbar/Navbar";
 import Home from "./pages/home/Home";
 import Profile from "./pages/profile/Profile";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { DarkModeContext } from "./Context/DarkModeContext";
 import { AuthContext } from "./Context/AuthContext";
 import { PersianContext } from "./Context/PersianContext";
@@ -20,7 +20,7 @@ import Loading from "./components/loading/Loading";
 
 function App() {
 
-const {currentUser} = useContext(AuthContext);
+const {currentUser,getUser} = useContext(AuthContext);
 
 const {darkMode} = useContext(DarkModeContext)
 
@@ -30,6 +30,7 @@ const {darkMode} = useContext(DarkModeContext)
 
 
 const Layout = () => {
+
   return (
     <div className={`theme-${darkMode?'dark':'light'} ${persian?'persian-font':null}`} dir={persian? 'rtl':'ltr'}>
       <Navbar />

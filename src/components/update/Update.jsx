@@ -4,6 +4,7 @@ import { makeRequest } from "../../axios";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 import { AuthContext } from "../../Context/AuthContext";
+import Loading from "../loading/Loading";
 const Update = ({ setOpenUpdate,user }) => {
     const [texts,setTexts] = useState(
         {
@@ -15,7 +16,8 @@ const Update = ({ setOpenUpdate,user }) => {
         const [cover,setCover] = useState(null)
         const [profile,setProfile] = useState(null)
         const {getUser} = useContext(AuthContext)
-      
+
+
     const upload = async (file) => {
         try {    
           const formData = new FormData();
@@ -43,25 +45,28 @@ const Update = ({ setOpenUpdate,user }) => {
       },
       onSuccess: () => {
         queryClient.invalidateQueries(["user"]);
-    
-      },
+        getUser()
+      }
     });
 
-    const handleClick = async (e) => {
-      e.preventDefault();
-  
+    const handleClick = async () => {
       let coverUrl ;
       let profileUrl ;
+      try{
       coverUrl = cover ? await upload(cover) : user.coverPic
       profileUrl = profile ? await upload(profile): user.profilePic
-
+      mutation.mutate({...texts,coverPic:coverUrl,profilePic:profileUrl});
+      setOpenUpdate(false)
+      }catch(err){
+        console.log(err.messages)
+      }
       
-        mutation.mutate({...texts,coverPic:coverUrl,profilePic:profileUrl});
-        getUser()
-        setOpenUpdate(false)
     };
 
+    if(mutation.isPending) return <Loading/>
+
     return (
+      
         <div className="update">
           <div className="wrapper">
             <h1>Update Your Profile</h1>

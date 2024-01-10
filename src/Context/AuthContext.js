@@ -12,7 +12,7 @@ const login = async(inputs)=>{
   const res =  await axios.post('http://localhost:8800/server/auth/login',inputs,{
     withCredentials:true
   })
-
+    
      setCurrentUser(res.data)
   
 }
@@ -24,6 +24,7 @@ const getUser = async()=>{
 
 useEffect(()=>{
     localStorage.setItem('user',JSON.stringify(currentUser))
+    
 },[currentUser])
 
 return(

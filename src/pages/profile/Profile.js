@@ -24,7 +24,6 @@ function Profile() {
   const [openUpdate,setOpenUpdate] = useState(false);
   const userId = useLocation().pathname.split('/')[2]
 
-useEffect(()=>{},[])
   const { isLoading, error, data } = useQuery({
     queryKey: ["user",userId],
     queryFn: () =>
@@ -57,7 +56,7 @@ useEffect(()=>{},[])
 
 
 if(isLoading){
-  return <div>Data is loading ...</div>
+  return <Loading/>
 }
 
 return (

@@ -3,7 +3,7 @@ import DarkModeOutlinedIcon from "@mui/icons-material/DarkModeOutlined";
 import WbSunnyOutlinedIcon from "@mui/icons-material/WbSunnyOutlined";
 import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
 import { Link, NavLink } from "react-router-dom";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { DarkModeContext } from "../../Context/DarkModeContext";
 import { AuthContext } from "../../Context/AuthContext";
 import { PersianContext } from "../../Context/PersianContext";
@@ -11,12 +11,15 @@ import UsaIcon from "../../assets/usa-icon-48.png";
 import IrIcon from "../../assets/ir-icon-48.png";
 import LogoutIcon from "@mui/icons-material/Logout";
 import { makeRequest } from "../../axios";
+import { getListSubheaderUtilityClass } from "@mui/material";
 
 function Navbar() {
   const { toggleDarkMode, darkMode } = useContext(DarkModeContext);
   const { toggleFa, persian } = useContext(PersianContext);
-  const { currentUser } = useContext(AuthContext);
+  const { currentUser,getUser } = useContext(AuthContext);
   const [searchedUsers, setSearchedUsers] = useState([]);
+
+
   const handleLogout = async (e) => {
     await makeRequest.post("/auth/logout").then((res) => res.data);
     window.location.reload();
@@ -37,7 +40,9 @@ function Navbar() {
     <>
       <div className="navbar">
         <div className="left">
-          <NavLink to={"/"} onClick={()=>{if(window.location.href === 'http://localhost:3000/')window.location.reload()}}  style={{ textDecoration: "none" }}>
+          <NavLink to={"/"} onClick={()=>{
+            getUser()
+            if(window.location.href === 'http://localhost:3000/')window.location.reload()}}  style={{ textDecoration: "none" }}>
             {!persian ? (
               <span className="eegram">EEgram</span>
             ) : (
@@ -112,7 +117,7 @@ function Navbar() {
               className="profilePic"
               alt=""
             />
-            <span className="name">{currentUser.name}</span>
+            <span onClick={()=>getUser()} className="name">{currentUser.name}</span>
           </NavLink>
           <div className="user"></div>
         </div>
