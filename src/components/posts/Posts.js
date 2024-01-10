@@ -6,7 +6,7 @@ import "./Posts.scss";
 
 function Posts({ userId }) {
   const { isLoading, error, data } = useQuery({
-    queryKey: ["posts"],
+    queryKey: ["posts",userId],
     queryFn: () =>
       makeRequest.get("/posts?userId=" + userId).then((res) => res.data),
     retry: 2,

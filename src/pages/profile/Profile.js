@@ -8,7 +8,7 @@ import LanguageIcon from "@mui/icons-material/Language";
 import EmailOutlinedIcon from "@mui/icons-material/EmailOutlined";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import Posts from "../../components/posts/Posts";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { PersianContext } from "../../Context/PersianContext";
 import { AuthContext } from "../../Context/AuthContext";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
@@ -24,9 +24,9 @@ function Profile() {
   const [openUpdate,setOpenUpdate] = useState(false);
   const userId = useLocation().pathname.split('/')[2]
 
-
+useEffect(()=>{},[])
   const { isLoading, error, data } = useQuery({
-    queryKey: ["user"],
+    queryKey: ["user",userId],
     queryFn: () =>
       makeRequest.get("/users/find/" + userId).then((res) => res.data),
   });

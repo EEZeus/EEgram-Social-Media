@@ -2,7 +2,6 @@ import "./Post.scss";
 import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
 import FavoriteOutlinedIcon from "@mui/icons-material/FavoriteOutlined";
 import TextsmsOutlinedIcon from "@mui/icons-material/TextsmsOutlined";
-import ShareOutlinedIcon from "@mui/icons-material/ShareOutlined";
 import MoreHorizOutlinedIcon from "@mui/icons-material/MoreHorizOutlined";
 import { PersianContext } from "../../Context/PersianContext";
 import { useContext, useState } from "react";
@@ -12,7 +11,6 @@ import moment from "moment";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { makeRequest } from "../../axios";
 import { AuthContext } from "../../Context/AuthContext";
-import { fabClasses } from "@mui/material";
 import Loading from "../loading/Loading";
 import PostLoading from "../loading/PostLoading";
 
@@ -83,7 +81,7 @@ function Post({ post }) {
       const res = await makeRequest.post("/translate", { desc: post.desc });
       setTranslatedText(<p>{res.data}</p>);
     } catch (err) {
-      setTranslatedText(err);
+      setTranslatedText('Sorry, Translation failed. Please check your network.');
     }
   } else{
     setTranslatedText('')
@@ -97,8 +95,8 @@ function Post({ post }) {
           <div className="userInfo">
             <img
               src={
-                currentUser.profilePic
-                  ? "../../../upload/" + currentUser.profilePic
+                post.profilePic
+                  ? "../../../upload/" + post.profilePic
                   : "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Default_pfp.svg/1024px-Default_pfp.svg.png"
               }
               alt=""

@@ -64,8 +64,8 @@ const Comments = ({ postId }) => {
           <div className="comment" key={comment.id}>
             <img
               src={
-                currentUser.profilePic
-                  ? "../../../upload/" + currentUser.profilePic
+                comment.profilePic
+                  ? "../../../upload/" + comment.profilePic
                   : "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Default_pfp.svg/1024px-Default_pfp.svg.png"
               }
               alt=""
