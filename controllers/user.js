@@ -12,6 +12,16 @@ export const getUser = (req, res) => {
   });
 };
 
+export const searchUser = (req, res) => {
+  const name = req.body.name;
+  const q = "SELECT * FROM users WHERE name LIKE ?";
+  db.query(q, [name + "%"], (err, data) => {
+    if (err) return res.status(500).json(err);
+    return res.status(200).json(data);
+  });
+};
+
+
 export const updateUser = (req, res) => {
   const token = req.cookies.accessToken;
   if (!token) return res.status(401).json("Not Logged In !");
