@@ -8,10 +8,13 @@ const [currentUser,setCurrentUser] = useState(JSON.parse(localStorage.getItem('u
 
 const login = async(inputs)=>{
     // need to be fetched from backend
+    
   const res =  await axios.post('http://localhost:8800/server/auth/login',inputs,{
     withCredentials:true
   })
-  setCurrentUser(res.data)
+
+     setCurrentUser(res.data)
+  
 }
 
 const getUser = async()=>{

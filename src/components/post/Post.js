@@ -14,6 +14,7 @@ import { makeRequest } from "../../axios";
 import { AuthContext } from "../../Context/AuthContext";
 import { fabClasses } from "@mui/material";
 import Loading from "../loading/Loading";
+import PostLoading from "../loading/PostLoading";
 
 function Post({ post }) {
   const [commentActive, setCommentActive] = useState(false);
@@ -78,9 +79,9 @@ function Post({ post }) {
   const handleTranslate = async (e) => {
     if(translatedText === ''){
     try {
-      setTranslatedText("Loading ...");
+      setTranslatedText(<PostLoading/>);
       const res = await makeRequest.post("/translate", { desc: post.desc });
-      setTranslatedText(res.data);
+      setTranslatedText(<p>{res.data}</p>);
     } catch (err) {
       setTranslatedText(err);
     }
@@ -142,13 +143,13 @@ function Post({ post }) {
         </div>
         <div className="content">
           <p>{post.desc}</p>
-          {!persian?<span
+          <span
             style={{ cursor: "pointer", color: "blue", fontSize: "14px" }}
             onClick={handleTranslate}
           >
             translate...
-          </span>:null}
-          <p>{translatedText? translatedText : null}</p>
+          </span>
+          {translatedText? <div style={{marginBlock:'5px',paddingLeft:'10px'}}>{translatedText}</div>: null}
           <img src={"../../../upload/" + post.img} alt="" />
         </div>
         <div className="info">

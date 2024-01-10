@@ -1,0 +1,26 @@
+.dots {
+   margin:5px;
+   width: 9.6px;
+   height: 9.6px;
+   background: #474bff;
+   color: #474bff;
+   border-radius: 50%;
+   box-shadow: 16px 0,-16px 0;
+   animation: dots-u8fzftsm 1s infinite linear alternate;
+}
+
+@keyframes dots-u8fzftsm {
+   0% {
+      box-shadow: 16px 0,-16px 0;
+   }
+
+   33% {
+      box-shadow: 16px 0,-16px 0 rgba(71,75,255,0.13);
+      background: rgba(71,75,255,0.13);
+   }
+
+   66% {
+      box-shadow: 16px 0 rgba(71,75,255,0.13),-16px 0;
+      background: rgba(71,75,255,0.13);
+   }
+}

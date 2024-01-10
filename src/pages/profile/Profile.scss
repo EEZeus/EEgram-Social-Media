@@ -31,6 +31,14 @@ $color-danger: #e40014;
         margin: auto;
         width: 250px;
         height: 250px;
+        @include tablet{
+          width: 200px;
+          height: 200px;
+        }
+        @include mobile{
+          width: 180px;
+          height: 180px;
+        }
         object-fit: cover;
         border-radius: 50%;
         -webkit-border-radius: 50%;
@@ -82,6 +90,9 @@ $color-danger: #e40014;
           gap: 50px;
           @include tablet {
             flex-wrap: wrap;
+          }
+          @include mobile{
+            gap:30px;
           }
           a {
             color: themed("textcolorsoft");

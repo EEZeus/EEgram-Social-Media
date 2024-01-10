@@ -85,6 +85,24 @@ $color-d: rgb(58, 89, 152);
       display: flex;
       align-items: center;
       gap: 20px;
+      .profilePic {
+        width: 45px;
+        height:45px;
+        border-radius: 50%;
+        -webkit-border-radius: 50%;
+        -moz-border-radius: 50%;
+        -ms-border-radius: 50%;
+        -o-border-radius: 50%;
+        object-fit: cover;
+      }
+      .name{
+        @include mobile {
+          display: none;
+        }
+        @include tablet {
+          display: none;
+        }
+      }
       .user {
         display: flex;
         align-items: center;
@@ -92,23 +110,5 @@ $color-d: rgb(58, 89, 152);
         font-weight: 500;
       }
     }
-  }
-}
-.profilePic {
-  width: 45px;
-  height:45px;
-  border-radius: 50%;
-  -webkit-border-radius: 50%;
-  -moz-border-radius: 50%;
-  -ms-border-radius: 50%;
-  -o-border-radius: 50%;
-  object-fit: cover;
-}
-.name{
-  @include mobile {
-    display: none;
-  }
-  @include tablet {
-    display: none;
   }
 }

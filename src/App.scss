@@ -1,3 +1,5 @@
+@import "./style.scss";
+
 @font-face {
   font-family: 'BNazanin';
   src: url('./assets/fonts/BNazanin.eot?#') format('eot'),  /* IE6–8 */
@@ -9,6 +11,13 @@
 .persian-font {
   text-align: center;
   font-family: BNazanin;
-  font-size: medium;
+  font-size: 24px;
+
+  @include tablet{
+    font-size: 20px;
+  }
+  @include mobile{
+    font-size: 18px;
+  }
 }
 

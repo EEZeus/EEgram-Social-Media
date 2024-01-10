@@ -1,6 +1,6 @@
 import Signup from "./pages/signup/Signup";
 import Login from "./pages/login/Login";
-import "./App.css";
+import "./App.scss";
 import {
   createBrowserRouter,
   Navigate,

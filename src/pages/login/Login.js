@@ -21,7 +21,7 @@ function Login() {
     e.preventDefault()
   try{
   await login(inputs)
-    navigate('/')
+  await navigate('/')
 }catch(err){
   setErr(err.response.data)
 }

@@ -6,7 +6,7 @@ import { PersianContext } from "../../Context/PersianContext";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { makeRequest } from "../../axios";
 import moment from "moment";
-import Loading from "../loading/Loading";
+import PostLoading from "../loading/PostLoading";
 const Comments = ({ postId }) => {
   const [desc, setDesc] = useState("");
   const { currentUser } = useContext(AuthContext);
@@ -58,7 +58,7 @@ const Comments = ({ postId }) => {
         </button>
       </div>
       {isLoading ? (
-        <Loading />
+        <PostLoading />
       ) : (
         data.map((comment) => (
           <div className="comment" key={comment.id}>

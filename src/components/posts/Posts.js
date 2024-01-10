@@ -1,18 +1,19 @@
 import { useQuery } from "@tanstack/react-query";
 import { makeRequest } from "../../axios";
 import Post from "../post/Post";
-import Loading from '../loading/Loading'
+import PostLoading from "../loading/PostLoading";
 import "./Posts.scss";
 
-function Posts({userId}) {
+function Posts({ userId }) {
   const { isLoading, error, data } = useQuery({
-    queryKey: ['posts'],
-    queryFn: () => makeRequest.get('/posts?userId='+userId).then(res => res.data),
-    retry:2
+    queryKey: ["posts"],
+    queryFn: () =>
+      makeRequest.get("/posts?userId=" + userId).then((res) => res.data),
+    retry: 2,
   });
 
   if (isLoading) {
-    return <Loading/>;
+    return <PostLoading />;
   }
 
   if (error) {
@@ -21,12 +22,9 @@ function Posts({userId}) {
 
   return (
     <div className="posts">
-      {data && data.map(post => (
-        <Post post={post} key={post.id} />
-      ))}
+      {data && data.map((post) => <Post post={post} key={post.id} />)}
     </div>
   );
 }
-
 
 export default Posts;
