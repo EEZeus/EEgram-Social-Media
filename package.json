@@ -29,6 +29,7 @@
     "mysql": "^2.18.1",
     "nodemon": "^3.0.2",
     "persian-tools2": "^1.5.0",
+    "socket.io": "^4.7.3",
     "translate-api": "^0.3.18"
   }
 }
