@@ -116,7 +116,7 @@ $color-d: rgb(58, 89, 152);
 .results{
   @include themify($themes) {
   color:themed('textcolor');
-
+  
   &::-webkit-scrollbar {
     width: 10px;
   }

@@ -26,11 +26,13 @@ $color-d : rgb(58,89,152);
         @include tablet{
             flex-direction:column;
             width: 80%;
+            overflow-y: scroll;
 
         }
         @include mobile{
             flex-direction:column;
             width: 90%;
+            overflow-y: scroll;
 
         }
         .left{

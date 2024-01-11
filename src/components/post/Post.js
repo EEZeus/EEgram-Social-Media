@@ -125,10 +125,10 @@ function Post({ post }) {
                       .replace("ago", "پیش")
                       .replace("an", "یک")
                       .replace("a", "یک")
-                      .replace("day", "روز")
                       .replace("days", "روز")
-                      .replace("hour", "ساعت")
-                      .replace("hours", "ساعت")}
+                      .replace("day", "روز")
+                      .replace("hours", "ساعت")
+                      .replace("hour", "ساعت")}
               </span>
             </div>
           </div>

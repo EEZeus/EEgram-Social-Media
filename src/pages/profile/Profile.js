@@ -1,12 +1,6 @@
 import "./Profile.scss";
-import FacebookOutlinedIcon from "@mui/icons-material/FacebookOutlined";
-import InstagramIcon from "@mui/icons-material/Instagram";
-import LinkedInIcon from "@mui/icons-material/LinkedIn";
-import TwitterIcon from "@mui/icons-material/Twitter";
 import PlaceIcon from "@mui/icons-material/Place";
 import LanguageIcon from "@mui/icons-material/Language";
-import EmailOutlinedIcon from "@mui/icons-material/EmailOutlined";
-import MoreVertIcon from "@mui/icons-material/MoreVert";
 import Posts from "../../components/posts/Posts";
 import { useContext, useEffect, useState } from "react";
 import { PersianContext } from "../../Context/PersianContext";
@@ -16,12 +10,14 @@ import { makeRequest } from "../../axios";
 import { useLocation } from "react-router-dom";
 import Update from '../../components/update/Update'
 import Loading from "../../components/loading/Loading";
+import Chat from "../../components/chat/Chat";
 function Profile() {
   const { persian } = useContext(PersianContext);
   const { currentUser } = useContext(AuthContext);
 
 
   const [openUpdate,setOpenUpdate] = useState(false);
+  const [openChat,setOpenChat] = useState(false)
   const userId = useLocation().pathname.split('/')[2]
 
   const { isLoading, error, data } = useQuery({
@@ -59,7 +55,7 @@ if(isLoading){
   return <Loading/>
 }
 
-return (
+return (<>
     <div className="profile">
       <div className="images">
         <img className="cover" src={data.coverPic?'../../../upload/'+data.coverPic:'https://tokystorage.s3.amazonaws.com/images/default-cover.png'} alt="" />
@@ -83,16 +79,21 @@ return (
             
           </div>
           <div className="right">
-          {+userId === currentUser.id? (<button onClick={()=>setOpenUpdate(true)}>Update</button>):
+          {+userId === currentUser.id? (<button onClick={()=>setOpenUpdate(true)}>{!persian?'Edit':'ویرایش'}</button>):
               rIsLoading ? (<Loading/>):(<button onClick={handleFollow} style={{backgroundColor:`${relationshipData.includes(currentUser.id)?'grey':'rgb(58, 89, 152)'}`}}>{!relationshipData.includes(currentUser.id)?(!persian ? "Follow" : "دنبال کردن"):(!persian ? "Following" : "دنبال شده")}</button>)
             
             }
+          {+userId !== currentUser.id? <button onClick={()=>setOpenChat(true)}>{!persian?'Message':'پیام'}</button>:null}
           </div>
         </div>
         <Posts userId ={userId} />
       </div>
       {openUpdate && <Update setOpenUpdate={setOpenUpdate} user={data}/>}
     </div>
+    {openChat?<Chat setOpenChat={setOpenChat} receiver={data}/>:null}
+
+    </>
+
   );
 }
 
